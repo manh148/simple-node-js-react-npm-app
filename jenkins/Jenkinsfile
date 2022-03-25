@@ -3,6 +3,7 @@ pipeline {
         docker {
             image 'node:lts-buster-slim'
             args '-p 3000:3000'
+            args '-v /Volumes/Nal/BKACAD/Jenkins/jenkins_home:/var/jenkins_home'
         }
     }
     environment {
