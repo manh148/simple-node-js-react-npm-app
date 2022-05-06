@@ -1,4 +1,7 @@
 pipeline {
+    triggers {
+        githubPush()
+    }
     agent {
         docker {
             image 'node:lts-buster-slim'
