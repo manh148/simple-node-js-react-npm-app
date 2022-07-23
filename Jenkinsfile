@@ -29,7 +29,7 @@ pipeline {
         sh 'echo Build completed on `date`'
         sh 'echo Pushing the Docker image...'
         sh "docker push ${PROJECT}:latest"
-        sh "docker push ${PROJECT}:${PROJECT}"   
+        sh "docker push ${PROJECT}:$COMMIT_HASH"   
         }
       }
     }
