@@ -8,6 +8,21 @@ pipeline {
   }
 
   stages {
+    stage ('Demo build Docker') {
+      agent {
+        docker {
+            image 'alpine'
+        }
+      }
+      steps {
+        script {
+        sh 'touch /tmp/DEMODOCKERBUILD.txt'  
+        sh "echo 'Test Docker Build' > /tmp/DEMODOCKERBUILD.txt"
+        }
+        stash includes: '/tmp/DEMODOCKERBUILD.txt', name: 'results' 
+      }
+    }
+    
     stage('Pre Build') { 
       steps {
         script {
@@ -19,6 +34,7 @@ pipeline {
     }
     stage('Build') { 
       steps {
+        unstash 'results'
         script {
         sh 'echo Start build ...'
         env.COMMIT_HASH = sh(script:'git rev-parse --short=8 HEAD', returnStdout: true).trim()
