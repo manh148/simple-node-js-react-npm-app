@@ -50,16 +50,16 @@ pipeline {
         }
       }
     }
-//     stage('Deploy') { 
-//       steps {
-//         script {
-//           sh 'rm -rf /opt/cicd/chainprotocol-infrastructure'
-//           sh "git clone https://${GIT_PAT}@github.com/Bsincent/chainprotocol-infrastructure.git /opt/cicd/chainprotocol-infrastructure"
-//           env.COMMIT_HASH = sh(script:'git rev-parse --short=8 HEAD', returnStdout: true).trim()
-//           sh 'sed -i "s/chainptc-dev-apikey.*/chainptc-dev-apikey:${COMMIT_HASH}/g" /opt/cicd/chainprotocol-infrastructure/helm/fullnode-chainprotocol-apikey/values.yaml'
-//           sh 'ansible-playbook /opt/cicd/chainptc-fullnode-apikey.yaml'
-//         }
-//       }
-//     }
+    stage('Update Helm Charts') { 
+      steps {
+        script {
+          sh "git clone https://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@github.com/manh148/simplehelm.git"
+          env.COMMIT_HASH = sh(script:'git rev-parse --short=8 HEAD', returnStdout: true).trim()
+          sh 'sed -i "s/manhnd1408/bkacad.*/manhnd1408/bkacad:${COMMIT_HASH}/g" simplehelm/simplehelm/values.yaml'
+          sh 'cd simplehelm && git add . && git commit -m "update new version"'
+          sh 'cd simplehelm && git push https://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@github.com/manh148/simplehelm.git '
+        }
+      }
+    }
   }
 }
