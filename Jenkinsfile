@@ -16,8 +16,9 @@ pipeline {
       }
       steps {
         script {
-        sh 'touch /tmp/DEMODOCKERBUILD.txt'  
-        sh "echo 'Test Docker Build' > /tmp/DEMODOCKERBUILD.txt"
+        sh 'touch /tmp/DEMODOCKERBUILD.txt' 
+        sh 'sleep 30'
+        sh "echo Test Docker Build > /tmp/DEMODOCKERBUILD.txt"
         }
         stash includes: '/tmp/DEMODOCKERBUILD.txt', name: 'results' 
       }
