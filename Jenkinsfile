@@ -3,7 +3,7 @@
 pipeline {
   agent any
   environment {
-    PROJECT = "bkacad"
+    PROJECT = "manhnd1408/bkacad"
     ENV = "test"
   }
 
@@ -33,16 +33,16 @@ pipeline {
         }
       }
     }
-    stage('Deploy') { 
-      steps {
-        script {
+//     stage('Deploy') { 
+//       steps {
+//         script {
 //           sh 'rm -rf /opt/cicd/chainprotocol-infrastructure'
 //           sh "git clone https://${GIT_PAT}@github.com/Bsincent/chainprotocol-infrastructure.git /opt/cicd/chainprotocol-infrastructure"
-          env.COMMIT_HASH = sh(script:'git rev-parse --short=8 HEAD', returnStdout: true).trim()
-          sh 'sed -i "s/chainptc-dev-apikey.*/chainptc-dev-apikey:${COMMIT_HASH}/g" /opt/cicd/chainprotocol-infrastructure/helm/fullnode-chainprotocol-apikey/values.yaml'
-          sh 'ansible-playbook /opt/cicd/chainptc-fullnode-apikey.yaml'
-        }
-      }
-    }
+//           env.COMMIT_HASH = sh(script:'git rev-parse --short=8 HEAD', returnStdout: true).trim()
+//           sh 'sed -i "s/chainptc-dev-apikey.*/chainptc-dev-apikey:${COMMIT_HASH}/g" /opt/cicd/chainprotocol-infrastructure/helm/fullnode-chainprotocol-apikey/values.yaml'
+//           sh 'ansible-playbook /opt/cicd/chainptc-fullnode-apikey.yaml'
+//         }
+//       }
+//     }
   }
 }
