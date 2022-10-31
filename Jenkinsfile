@@ -39,8 +39,8 @@ pipeline {
         script {
 //           sh "git clone https://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@github.com/manh148/simplehelm.git"
           env.COMMIT_HASH = sh(script:'git rev-parse --short=8 HEAD', returnStdout: true).trim()
-          sh 'cd simplehelm && git pull'
-          sh 'sed -i "s/bkacad.*/bkacad:${COMMIT_HASH}/g" simplehelm/simplehelm/values.yaml'
+//           sh 'cd simplehelm'
+          sh 'sed -i "s/bkacad.*/bkacad:${COMMIT_HASH}/g" /var/lib/jenkins/simplehelm/simplehelm/values.yaml'
           sh 'cd simplehelm && git add . && git commit -m "update new version"'
           sh 'cd simplehelm && git push'
         }
