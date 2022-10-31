@@ -41,8 +41,8 @@ pipeline {
           env.COMMIT_HASH = sh(script:'git rev-parse --short=8 HEAD', returnStdout: true).trim()
 //           sh 'cd simplehelm'
           sh 'sed -i "s/bkacad.*/bkacad:${COMMIT_HASH}/g" /var/lib/jenkins/simplehelm/simplehelm/values.yaml'
-          sh 'cd simplehelm && git add . && git commit -m "update new version"'
-          sh 'cd simplehelm && git push'
+//           sh 'cd simplehelm && git add . && git commit -m "update new version"'
+//           sh 'cd simplehelm && git push'
         }
       }
     }
